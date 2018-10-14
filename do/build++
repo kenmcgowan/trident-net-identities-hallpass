@@ -1,0 +1,3 @@
+source ./do/.env
+let kd_version_build++
+echo -n $kd_version_build > .version/build

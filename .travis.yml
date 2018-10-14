@@ -1,0 +1,16 @@
+language: csharp
+mono: none
+dotnet: 2.1.403
+solution: TrIdent.Identities.Hallpass.sln
+script:
+  - export kd_module=$(cat .info/module | xargs)
+  - export kd_project=$(cat .info/project | xargs)
+  - export kd_version_major=$(cat .version/major | xargs)
+  - export kd_version_minor=$(cat .version/minor | xargs)
+  - export kd_version_patch=$(cat .version/patch | xargs)
+  - export kd_version_build=$(cat .version/build | xargs)
+  - export kd_version_suffix=-alpha.$kd_version_build
+  - echo "Building $kd_project version $kd_version_major.$kd_version_minor.$kd_version_patch.$kd_version_build"
+  - dotnet build
+  - cd $kd_module.Specifications
+  - dotnet test
