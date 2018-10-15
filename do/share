@@ -1,13 +1,15 @@
 bash ./do/build++
 source ./do/.env
 
-echo ################################################################################
+echo --------------------------------------------------------------------------------
 echo $kd_version_major.$kd_version_minor.$kd_version_patch$kd_version_suffix
-echo ################################################################################
-echo
+echo --------------------------------------------------------------------------------
 
 rm -rf "$(readlink -f ..)"/.pub/$kd_project
-dotnet clean
-dotnet build
+dotnet clean $kd_module.Specifications/$kd_module.Specifications.csproj
+dotnet clean $kd_module/$kd_module.csproj
+bash ./do/generatemetadata
+dotnet build $kd_module/$kd_module.csproj
+dotnet build $kd_module.Specifications/$kd_module.Specifications.csproj
 dotnet publish -o "$(readlink -f ..)"/.pub/$kd_project/lib $kd_module/$kd_module.csproj
 dotnet publish -o "$(readlink -f ..)"/.pub/$kd_project/spec $kd_module.Specifications/$kd_module.Specifications.csproj --no-dependencies
