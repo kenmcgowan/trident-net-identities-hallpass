@@ -7,7 +7,7 @@ script:
   - export kd_version_major=$(cat .metadata/version_major | xargs)
   - export kd_version_minor=$(cat .metadata/version_minor | xargs)
   - export kd_version_patch=$(cat .metadata/version_patch | xargs)
-  - export kd_version_build=$(cat .metadata/version_build | xargs)
+  - export kd_version_build=$TRAVIS_BUILD_NUMBER
   - export kd_version_suffix=-alpha.$kd_version_build
   - echo "Building $kd_project version $kd_version_major.$kd_version_minor.$kd_version_patch.$kd_version_build"
   - bash ./do/generatemetadata
