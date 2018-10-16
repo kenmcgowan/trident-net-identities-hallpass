@@ -1,5 +1,5 @@
 source ./do/.env
 let kd_version_minor++
-echo -n $kd_version_minor > .version/minor
-echo -n 0 > .version/patch
-echo -n 0 > .version/build
+echo -n $kd_version_minor > .metadata/version_minor
+echo -n 0 > .metadata/version_patch
+echo -n 0 > .metadata/version_build
