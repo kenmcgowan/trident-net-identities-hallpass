@@ -1,3 +1,4 @@
+#!/bin/bash
 source ./do/.env
 let kd_version_patch++
 echo -n $kd_version_patch > .metadata/version_patch

@@ -1,2 +1,3 @@
+#!/bin/bash
 source ./do/.env
 echo $kd_module.$kd_version_major.$kd_version_minor.$kd_version_patch$kd_version_suffix

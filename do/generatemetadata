@@ -1,3 +1,4 @@
+#!/bin/bash
 mdfilepath="./metadata.generated.csproj"
 echo -n "<Project><PropertyGroup>" > $mdfilepath
 echo -n "<Version>$kd_version_major.$kd_version_minor.$kd_version_patch$kd_version_suffix</Version>" >> $mdfilepath

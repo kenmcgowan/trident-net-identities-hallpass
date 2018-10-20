@@ -1,3 +1,4 @@
+#!/bin/bash
 source ./do/.env
 let kd_version_minor++
 echo -n $kd_version_minor > .metadata/version_minor
