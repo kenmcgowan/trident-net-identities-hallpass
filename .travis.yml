@@ -9,9 +9,7 @@ script:
   - export kd_version_patch=$(cat .metadata/version_patch | tr -d '\r\n\t ')
   - export kd_version_build=$TRAVIS_BUILD_NUMBER
   - export kd_version_suffix=-alpha.$kd_version_build
-  - echo --------------------------------------------------------------------------------
   - echo "Building $kd_project version $kd_version_major.$kd_version_minor.$kd_version_patch.$kd_version_build"
-  - echo --------------------------------------------------------------------------------
   - bash ./do/generatemetadata
   - dotnet build $kd_module/$kd_module.csproj
   - dotnet build $kd_module.Specifications/$kd_module.Specifications.csproj
