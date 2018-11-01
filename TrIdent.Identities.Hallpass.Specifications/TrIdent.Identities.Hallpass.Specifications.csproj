@@ -21,4 +21,13 @@
     <ProjectReference Include="..\TrIdent.Identities.Hallpass\TrIdent.Identities.Hallpass.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="TrIdent">
+      <HintPath>..\..\.pub\trident-net\spec\TrIdent.dll</HintPath>
+    </Reference>
+    <Reference Include="TrIdent.Specifications">
+      <HintPath>..\..\.pub\trident-net\spec\TrIdent.Specifications.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
