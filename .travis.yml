@@ -1,16 +1,29 @@
 language: csharp
 mono: none
 dotnet: 2.1.403
-script:
-  - export kd_module=$(cat .metadata/module | tr -d '\r\n\t ')
-  - export kd_project=$(cat .metadata/project | tr -d '\r\n\t ')
-  - export kd_version_major=$(cat .metadata/version_major | tr -d '\r\n\t ')
-  - export kd_version_minor=$(cat .metadata/version_minor | tr -d '\r\n\t ')
-  - export kd_version_patch=$(cat .metadata/version_patch | tr -d '\r\n\t ')
-  - export kd_version_build=$TRAVIS_BUILD_NUMBER
-  - export kd_version_suffix=-alpha.$kd_version_build
-  - echo "Building $kd_project version $kd_version_major.$kd_version_minor.$kd_version_patch.$kd_version_build"
-  - bash ./do/generatemetadata
-  - dotnet build $kd_module/$kd_module.csproj
-  - dotnet build $kd_module.Specifications/$kd_module.Specifications.csproj
-  - dotnet test $kd_module.Specifications/$kd_module.Specifications.csproj
+env:
+  global:
+    kd_is_tag_build=$( if [[ $TRAVIS_BRANCH == $TRAVIS_TAG ]]; then echo -n 1; else echo -n 0; fi; )
+    kd_is_beta_build=$( if [[ $kd_is_tag_build == 0 && $TRAVIS_BRANCH == "develop" ]]; then echo -n 1; else echo -n 0; fi; )
+    kd_is_release_build=$( if [[ $kd_is_tag_build == 0 && $TRAVIS_BRANCH == "master" ]]; then echo -n 1; else echo -n 0; fi; )
+    kd_is_alpha_build=$( if [[ $kd_is_tag_build == 0 && $kd_is_beta_build == 0 && $kd_is_release_build == 0 && $TRAVIS_BRANCH == feature\/* ]]; then echo -n 1; else echo -n 0; fi; )
+    kd_is_dev_build=$( if [[ $kd_is_tag_build == 0 && $kd_is_beta_build == 0 && $kd_is_release_build == 0 && $kd_is_alpha_build == 0 ]]; then echo -n 1; else echo -n 0; fi; )
+    kd_build_type=$( if [[ $kd_is_tag_build == 1 ]]; then echo -n TAG; elif [[ $kd_is_dev_build == 1 ]]; then echo -n DEV; elif [[ $kd_is_alpha_build == 1 ]]; then echo -n ALPHA; elif [[ $kd_is_beta_build == 1 ]]; then echo -n BETA; elif [[ $kd_is_release_build == 1 ]]; then echo -n "RELEASE"; else echo -n UNKNOWN; fi; )
+    kd_module=$(cat .metadata/module | tr -d '\r\n\t ')
+    kd_project=$(cat .metadata/project | tr -d '\r\n\t ')
+    kd_version_major=$(cat .metadata/version_major | tr -d '\r\n\t ')
+    kd_version_minor=$(cat .metadata/version_minor | tr -d '\r\n\t ')
+    kd_version_patch=$(cat .metadata/version_patch | tr -d '\r\n\t ')
+    kd_version_build=$TRAVIS_BUILD_NUMBER
+    kd_version_suffix=$( if [[ $kd_is_tag_build == 1 ]]; then echo -n "-adhoc.$kd_version_build+TAG"; elif [[ $kd_is_dev_build == 1 ]]; then echo -n "-adhoc.$kd_version_build"; elif [[ $kd_is_alpha_build == 1 ]]; then echo -n "-alpha.$kd_version_build"; elif [[ $kd_is_beta_build == 1 ]]; then echo -n "-beta.$kd_version_build"; elif [[ $kd_is_release_build == 1 ]]; then echo -n ""; else echo -n "[UNKNOWN BUILD TYPE]"; fi; )
+    kd_package_semver="$kd_version_major.$kd_version_minor.$kd_version_patch$kd_version_suffix"
+    kd_package_name="$kd_module.$kd_package_semver"
+    kd_spec_package_name="$kd_module.Specifications.$kd_package_semver"
+jobs:
+  include:
+    - stage: Build and Unit Test
+      script:
+      - echo "$kd_build_type build:"; echo "Is Tag Build     => $kd_is_tag_build"; echo "Is Dev Build     => $kd_is_dev_build"; echo "Is Alpha Build   => $kd_is_alpha_build"; echo "Is Beta Build    => $kd_is_beta_build"; echo "Is Release Build => $kd_is_release_build"; echo "Package Name     => $kd_package_name"
+      - ./.ci/build
+      - ./.ci/test
+      - ./.ci/publish
