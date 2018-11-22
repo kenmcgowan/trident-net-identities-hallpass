@@ -1,6 +1,8 @@
 language: csharp
 mono: none
 dotnet: 2.1.403
+install:
+  - nuget sources add -name trident-net-proget -source http://ec2-54-184-14-127.us-west-2.compute.amazonaws.com/nuget/trident-net/
 env:
   global:
     kd_is_tag_build=$( if [[ $TRAVIS_BRANCH == $TRAVIS_TAG ]]; then echo -n 1; else echo -n 0; fi; )
