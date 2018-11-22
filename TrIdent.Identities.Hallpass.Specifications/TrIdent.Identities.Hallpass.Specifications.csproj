@@ -6,6 +6,9 @@
     <PackageId>TrIdent.Identities.Hallpass.Specifications</PackageId>
     <Authors>Ken McGowan</Authors>
     <Company>kenmcgowan.com</Company>
+    <Copyright>Copyright © 2018 Ken McGowan. All Rights Reserved.</Copyright>
+    <RepositoryType>git</RepositoryType>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <Import Project="..\metadata.generated.csproj" Condition="Exists('..\metadata.generated.csproj')" />
@@ -13,21 +16,14 @@
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.4.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="TrIdent" Version="0.1.0-alpha.88" />
+    <PackageReference Include="TrIdent.Specifications" Version="0.1.0-alpha.88" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TrIdent.Identities.Hallpass\TrIdent.Identities.Hallpass.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="TrIdent">
-      <HintPath>..\..\.pub\trident-net\spec\TrIdent.dll</HintPath>
-    </Reference>
-    <Reference Include="TrIdent.Specifications">
-      <HintPath>..\..\.pub\trident-net\spec\TrIdent.Specifications.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
