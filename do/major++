@@ -1,0 +1,7 @@
+#!/bin/bash
+source ./do/.env
+let kd_version_major++
+echo -n $kd_version_major > .metadata/version_major
+echo -n 0 > .metadata/version_minor
+echo -n 0 > .metadata/version_patch
+echo -n 0 > .metadata/version_build

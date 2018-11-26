@@ -1,0 +1,13 @@
+#!/bin/bash
+source ./do/.env
+
+dotnet new solution --name $kd_module
+
+dotnet new classlib --framework netcoreapp2.1 --language "c#" --name $kd_module
+dotnet sln add $kd_module/$kd_module.csproj
+
+dotnet new xunit --framework netcoreapp2.1 --language "c#" --name $kd_module.Specifications
+dotnet add $kd_module.Specifications/$kd_module.Specifications.csproj package FluentAssertions
+dotnet sln add $kd_module.Specifications/$kd_module.Specifications.csproj
+
+dotnet add $kd_module.Specifications/$kd_module.Specifications.csproj reference $kd_module/$kd_module.csproj
