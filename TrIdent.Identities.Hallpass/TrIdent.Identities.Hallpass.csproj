@@ -6,7 +6,7 @@
     <PackageId>TrIdent.Identities.Hallpass</PackageId>
     <Authors>Ken McGowan</Authors>
     <Company>kenmcgowan.com</Company>
-    <Copyright>Copyright © 2018 Ken McGowan. All Rights Reserved.</Copyright>
+    <Copyright>Copyright ï¿½ 2018 Ken McGowan. All Rights Reserved.</Copyright>
     <RepositoryType>git</RepositoryType>
     <RootNamespace>TrIdent.Identities</RootNamespace>
   </PropertyGroup>
@@ -14,7 +14,7 @@
   <Import Project="..\metadata.generated.csproj" Condition="Exists('..\metadata.generated.csproj')" />
 
   <ItemGroup>
-    <PackageReference Include="TrIdent" Version="0.1.0-alpha.88" />
+    <PackageReference Include="TrIdent" Version="0.1.0-beta.95" />
   </ItemGroup>
 
 </Project>
