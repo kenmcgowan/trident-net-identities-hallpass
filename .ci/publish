@@ -2,6 +2,6 @@
 echo "Packaging and publishing $kd_build_type build of $kd_project version $kd_package_name"
 # For now, relying on a preexisting build.
 dotnet pack $kd_module/$kd_module.csproj --no-build --output .. --verbosity normal
-dotnet nuget push $kd_package_name.nupkg --api-key $proget_api_key --source http://ec2-54-184-14-127.us-west-2.compute.amazonaws.com/nuget/trident-net/
+dotnet nuget push $kd_package_name.nupkg --api-key $nuget_feed_api_key --source $nuget_feed_url
 dotnet pack $kd_module.Specifications/$kd_module.Specifications.csproj --no-build --output .. --verbosity normal
-dotnet nuget push $kd_spec_package_name.nupkg --api-key $proget_api_key --source http://ec2-54-184-14-127.us-west-2.compute.amazonaws.com/nuget/trident-net/
+dotnet nuget push $kd_spec_package_name.nupkg --api-key $nuget_feed_api_key --source $nuget_feed_url
