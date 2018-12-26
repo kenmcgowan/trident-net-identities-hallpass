@@ -8,6 +8,10 @@
 # Ignore the file generated to dynamically update version information
 metadata.generated.csproj
 
+# Ignore test coverage results
+coverage.json
+coverage.opencover.xml
+
 # User-specific files
 *.suo
 *.user
