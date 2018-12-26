@@ -1,4 +1,5 @@
 #!/bin/bash
+.ci/install-dependencies
 echo "Running unit tests for $kd_build_type build of $kd_project version $kd_version_major.$kd_version_minor.$kd_version_patch.$kd_version_build"
 bash ./do/generatemetadata
 dotnet test $kd_module.Specifications/$kd_module.Specifications.csproj
