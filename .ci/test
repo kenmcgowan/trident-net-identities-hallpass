@@ -2,3 +2,4 @@
 echo "Running unit tests for $kd_build_type build of $kd_project version $kd_version_major.$kd_version_minor.$kd_version_patch.$kd_version_build"
 bash ./do/generatemetadata
 dotnet test $kd_module.Specifications/$kd_module.Specifications.csproj
+./coverlet $kd_module.Specifications/bin/Debug/netcoreapp2.0/$kd_module.Specifications.dll --format opencover --target "dotnet" --targetargs "test --no-build $kd_module.Specifications/$kd_module.Specifications.csproj"
