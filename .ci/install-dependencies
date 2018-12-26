@@ -1,2 +1,2 @@
 #!/bin/bash
-dotnet install --global coverlet.console
+dotnet tool install --global coverlet.console
