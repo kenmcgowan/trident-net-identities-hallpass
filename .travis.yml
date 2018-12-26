@@ -1,6 +1,7 @@
 language: csharp
 mono: none
 dotnet: 2.1.403
+install: .ci/install-dependencies
 env:
   global:
     kd_is_tag_build=$( if [[ $TRAVIS_BRANCH == $TRAVIS_TAG ]]; then echo -n 1; else echo -n 0; fi; )
